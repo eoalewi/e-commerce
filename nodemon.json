@@ -1,0 +1,8 @@
+{
+    "env": {
+        "MONGO_USER": "Alewi",
+        "MONGO_PASSWORD": "Alewitosin",
+        "MONGO_DEFAULT_DATABASE": "shop",
+        "STRIPE_KEY": "sk_test_51KcrmBL6vJLP7l2RNUGxZlrz0uTkMXHBDRzMUct6bKO7a0mnrs0TNsC6WxINSJj5xWyTtfVTpH56TGSE9pvDDoLw00J4EURVXZ"
+    }
+}
