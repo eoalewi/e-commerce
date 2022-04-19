@@ -91,13 +91,10 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
-  // console.log("abcde")
   req.user
-    .populate('cart.items.productId')
-    .execPopulate()
+    .populate('cart')
     .then(user => {
       const products = user.cart.items;
-      // console.log("abc")
       res.render('shop/cart', {
         path: '/cart',
         pageTitle: 'Your Cart',
@@ -106,7 +103,6 @@ exports.getCart = (req, res, next) => {
     })
     .catch(err => {
       const error = new Error(err);
-      // console.log('abcdefg')
       error.httpStatusCode = 500;
       return next(error);
     });
@@ -119,13 +115,10 @@ exports.postCart = (req, res, next) => {
       return req.user.addToCart(product);
     })
     .then(result => {
-      console.log(result);
-      // console.log("Guy")
       res.redirect('/cart');
     })
     .catch(err => {
       const error = new Error(err);
-      // console.log("Guy")
       error.httpStatusCode = 500;
       return next(error);
     });
