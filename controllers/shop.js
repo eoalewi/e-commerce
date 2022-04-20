@@ -92,7 +92,7 @@ exports.getIndex = (req, res, next) => {
 
 exports.getCart = (req, res, next) => {
   req.user
-    .populate('cart')
+    .populate('cart.items.productId')
     .then(user => {
       const products = user.cart.items;
       res.render('shop/cart', {
@@ -144,7 +144,7 @@ exports.getCheckout = (req, res, next) => {
   let total = 0
   req.user
     .populate('cart.items.productId')
-    .execPopulate()
+    // .execPopulate()
     .then(user => {
       products = user.cart.items;
       total = 0;
@@ -184,8 +184,6 @@ exports.getCheckout = (req, res, next) => {
 };
 
 
-
-
 exports.getOrders = (req, res, next) => {
   Order.find({ 'user.userId': req.user._id })
     .then(orders => {
@@ -206,7 +204,7 @@ exports.getOrders = (req, res, next) => {
 exports.getCheckoutSuccess = (req, res, next) => {
   req.user
     .populate('cart.items.productId')
-    .execPopulate()
+    // .execPopulate()
     .then(user => {
       const products = user.cart.items.map(i => {
         return { quantity: i.quantity, product: { ...i.productId._doc } };
@@ -237,7 +235,7 @@ exports.getCheckoutSuccess = (req, res, next) => {
 exports.postOrder = (req, res, next) => {
   req.user
     .populate('cart.items.productId')
-    .execPopulate()
+    // .execPopulate()
     .then(user => {
       const products = user.cart.items.map(i => {
         return { quantity: i.quantity, product: { ...i.productId._doc } };
