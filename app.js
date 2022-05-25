@@ -10,7 +10,6 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf");
 const flash = require("connect-flash");
 const multer = require("multer");
-const helmet = require("helmet");
 const compression = require("compression");
 const morgan = require("morgan");
 
@@ -64,7 +63,6 @@ const accessLogStream = fs.createWriteStream(
     { flags: "a" }
 )
 
-app.use(helmet())
 app.use(compression())
 app.use(morgan("combined", { stream: accessLogStream }))
 
